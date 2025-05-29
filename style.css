@@ -109,7 +109,7 @@
   }
   
   #result-message {
-    font-size: 1.0rem;
+    font-size: 0.9rem;
     line-height: 1.6;
     white-space: pre-wrap;
   }
@@ -199,6 +199,7 @@
     padding: 1rem;
     border-radius: 10px;
     margin-bottom: 0.5rem;
+    margin-top: 0rem; 
   }
   
   .score-safe {
@@ -222,7 +223,7 @@
   }
   
   .description {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #333;
     line-height: 1.6;
   }
