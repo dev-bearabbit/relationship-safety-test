@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Relationship Safety Test</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header id="main-title">연애 안전도 테스트</header>
+
+  <main id="app">
+    <section id="intro">
+      <h1 class="intro-text">
+        그 사람, 정말 나를 존중하고 있을까요?<br />
+        이 테스트로 연애 속 위험 신호를 확인해보세요.
+      </h1>
+      <div class="language-select">
+        <button data-lang="ko">한국어로 시작</button>
+        <button data-lang="en">Start in English</button>
+      </div>
+    </section>
+
+    <section id="quiz-section" style="display:none">
+        <div id="progress-bar"><span id="progress-text"></span></div>
+      
+        <div class="quiz-content">
+          <div id="question-card"></div>
+          <div id="options"></div>
+        </div>
+      
+        <div class="nav-buttons">
+          <button id="prev-btn">← BACK</button>
+        </div>
+      </section>
+
+    <section id="result-section" style="display:none">
+      <div id="result-message"></div>
+      <button id="restart-btn">Restart</button>
+    </section>
+  </main>
+  <script src="script.js"></script>
+  <footer>
+    <img src="assets/image/logo.jpg" alt="signature logo" />
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+{
+    "title": "Relationship Safety Test",
+    "questions": [
+      "They confessed deep love early\nin the relationship.",
+      "They try to check your phone or\nread your messages.",
+      "They get upset or angry\nwhen you reply late or don’t pick up.",
+      "They make negative comments\nabout your clothes, makeup, or social media.",
+      "They dislike or interfere with your time\nwith friends or family.",
+      "They often say things like,\n“Only I really care about you.”",
+      "They blame you\nfor their anger or mood swings.",
+      "They justify hurtful words by saying\nit’s because they love you.",
+      "They tell you that you’re too sensitive\nwhen you express discomfort.",
+      "When angry,\nthey throw things or punch walls.",
+      "They have pushed, grabbed, or\nphysically restrained you during an argument.",
+      "They’ve threatened to harm you or\npeople around you.",
+      "When you tried to break up, they cried,\nbegged, or threatened self-harm.",
+      "They’ve shown up near your home, school,\nor workplace after being rejected.",
+      "They keep contacting you with\ndifferent numbers even after being blocked."
+    ],
+    "options": [
+      "Never happened",
+      "Hardly ever",
+      "Sometimes",
+      "Quite often",
+      "Very often"
+    ],
+    "submit": "Submit",
+    "results": {
+      "safe": "✅ Your relationship seems relatively safe.\nYou likely respect each other's boundaries and feelings.\nKeep listening to each other and communicate honestly and calmly when conflicts arise.",
+      "caution": "🟡 Some warning signs are present.\nIt may not be a dangerous situation yet, but don’t ignore these feelings.\nIf something feels off or uncomfortable, honor your emotions and prioritize your well-being.",
+      "warning": "🟠 There are clear warning signs.\nYour partner might be manipulating your emotions, limiting your freedom,\nor repeating uncomfortable behaviors. Consider creating emotional distance and talking to someone you trust.\nBegin protecting yourself.",
+      "danger": "🔴 This could be a highly dangerous situation.\nEmotional, psychological, or even physical abuse may be involved.\nYou're not alone. Reach out to a friend, family member, or a professional counselor immediately. Your safety comes first."
+    }
+  }
+  
