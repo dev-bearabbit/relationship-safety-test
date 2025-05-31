@@ -11,17 +11,41 @@ const questionCard = document.getElementById('question-card');
 const optionsDiv = document.getElementById('options');
 const progressText = document.getElementById('progress-text');
 
-document.querySelectorAll('[data-lang]').forEach(btn => {
+// ✅ 언어 버튼 클릭 → 언어 적용 + 시작 버튼 표시
+document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     currentLang = btn.dataset.lang;
+
+    // 버튼 선택 상태 스타일 적용
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    // 언어 JSON 불러오기
     fetch(`lang/${currentLang}.json`)
       .then(res => res.json())
       .then(data => {
         quizData = data;
-        startQuiz();
+        applyLanguage(); // 전체 텍스트 업데이트
+        document.getElementById('start-btn').style.display = 'block';
       });
   });
 });
+
+// ✅ 시작 버튼 클릭 시 퀴즈 시작
+document.getElementById('start-btn').addEventListener('click', () => {
+  if (!quizData) return; // 언어 선택 안 했으면 동작 X
+  startQuiz();
+});
+
+// ✅ 전체 텍스트 적용 함수
+function applyLanguage() {
+  document.getElementById('main-title').innerText = quizData.title;
+  document.querySelector('.intro-text').innerHTML = quizData.intro.replace(/\n/g, '<br>');
+  document.getElementById('start-btn').innerText = quizData.start;
+  document.getElementById('prev-btn').innerText = quizData.back;
+  document.getElementById('restart-btn').innerText = quizData.restart;
+  document.getElementById('share-btn').innerText = quizData.share;
+}
 
 function startQuiz() {
   introSection.style.display = 'none';
@@ -66,58 +90,52 @@ document.getElementById('prev-btn').onclick = () => {
 
 function checkImmediateDanger() {
   const dangerConditions = [
-    { index: 9, minScore: 2 },  // Q10: 물건 던지기, 벽 치기
-    { index: 10, minScore: 2 }, // Q11: 밀치기, 잡아채기
-    { index: 11, minScore: 1 }, // Q12: 죽이고 죽겠다
-    { index: 12, minScore: 1 }, // Q13: 자해 암시
-    { index: 13, minScore: 1 }, // Q14: 스토킹 암시
-    { index: 14, minScore: 1 }  // Q15: 협박 암시
+    { index: 9, minScore: 2 },
+    { index: 10, minScore: 2 },
+    { index: 11, minScore: 1 },
+    { index: 12, minScore: 1 },
+    { index: 13, minScore: 1 },
+    { index: 14, minScore: 1 }
   ];
   return dangerConditions.some(cond => answers[cond.index] !== null && answers[cond.index] >= cond.minScore);
 }
 
 function showResult() {
-    quizSection.style.display = 'none';
-    resultSection.style.display = 'block';
-  
-    let score = 0;
-    answers.forEach((a, i) => {
-      if (a !== null) score += a * weights[i];
-    });
-  
-    let resultKey = 'safe';
-    let scoreClass = 'score-safe';
-  
-    // Killer 문항 조건 확인
-    const isImmediateDanger = checkImmediateDanger();
-  
-    // 결과 판단
-    if (isImmediateDanger) {
-      resultKey = 'danger';
-      scoreClass = 'score-danger';
-      // 점수가 낮아도 납득이 가게끔 보정
-      if (score < 70) {
-        score = 70;
-      }
-  
-    } else if (score >= 66) {
-      resultKey = 'danger';
-      scoreClass = 'score-danger';
-    } else if (score >= 46) {
-      resultKey = 'warning';
-      scoreClass = 'score-warning';
-    } else if (score >= 26) {
-      resultKey = 'caution';
-      scoreClass = 'score-caution';
-    }
+  quizSection.style.display = 'none';
+  resultSection.style.display = 'block';
 
-    score = Math.ceil(score);
-  
-    document.getElementById('result-message').innerHTML = `
-      <div class="score-box ${scoreClass}">${score}점</div>
-      <div class="description">${quizData.results[resultKey]}</div>
-    `;
-  }  
+  let score = 0;
+  answers.forEach((a, i) => {
+    if (a !== null) score += a * weights[i];
+  });
+
+  let resultKey = 'safe';
+  let scoreClass = 'score-safe';
+  const isImmediateDanger = checkImmediateDanger();
+
+  if (isImmediateDanger) {
+    resultKey = 'danger';
+    scoreClass = 'score-danger';
+    score += 66;
+    if (score > 100) score = 100;
+  } else if (score >= 66) {
+    resultKey = 'danger';
+    scoreClass = 'score-danger';
+  } else if (score >= 46) {
+    resultKey = 'warning';
+    scoreClass = 'score-warning';
+  } else if (score >= 26) {
+    resultKey = 'caution';
+    scoreClass = 'score-caution';
+  }
+
+  score = Math.ceil(score);
+
+document.getElementById('result-message').innerHTML = `
+    <div class="score-box ${scoreClass}">${score}${quizData.score}</div>
+    <div class="description">${quizData.results[resultKey]}</div>
+  `;
+}
 
 document.getElementById('restart-btn').onclick = () => {
   resultSection.style.display = 'none';
@@ -128,4 +146,11 @@ document.getElementById('main-title').onclick = () => {
   resultSection.style.display = 'none';
   quizSection.style.display = 'none';
   introSection.style.display = 'block';
+};
+
+document.getElementById('share-btn').onclick = () => {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    alert(quizData?.copy_success || '링크가 복사되었습니다!');
+  });
 };

@@ -1,5 +1,12 @@
 {
     "title": "Relationship Safety Test",
+    "intro": "Does your partner really respect you?\nCheck the danger signs in your relationship with this test.",
+    "start": "Start Test",
+    "share": "Share Link",
+    "copy_success": "✔️ Link Copied!",
+    "score": " pts",
+    "back": "← BACK",
+    "restart": "Restart",
     "questions": [
       "They confessed deep love early\nin the relationship.",
       "They try to check your phone or\nread your messages.",

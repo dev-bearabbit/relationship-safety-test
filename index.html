@@ -15,11 +15,14 @@
       <h1 class="intro-text">
         그 사람, 정말 나를 존중하고 있을까요?<br />
         이 테스트로 연애 속 위험 신호를 확인해보세요.
-      </h1>
-      <div class="language-select">
-        <button data-lang="ko">한국어로 시작</button>
-        <button data-lang="en">Start in English</button>
+      </h1>   
+
+      <div id="language-choice">
+        <button class="lang-btn" data-lang="ko" >한국어</button>
+        <button class="lang-btn" data-lang="en">English</button>
       </div>
+
+      <button id="start-btn">테스트 시작하기</button>
     </section>
 
     <section id="quiz-section" style="display:none">
@@ -37,7 +40,10 @@
 
     <section id="result-section" style="display:none">
       <div id="result-message"></div>
-      <button id="restart-btn">Restart</button>
+      <div class="result-buttons">
+        <button id="restart-btn">다시하기</button>
+        <button id="share-btn">공유하기</button>
+      </div>
     </section>
   </main>
   <script src="script.js"></script>
